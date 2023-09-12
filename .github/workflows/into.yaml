@@ -18,7 +18,7 @@ jobs:
           run-install: false
 
       - name: Install dependencies
-        run : npm install
+        run : pnpm install
 
       - name: Build
-        run : npm run build
+        run : pnpm run build
