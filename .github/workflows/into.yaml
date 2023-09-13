@@ -103,11 +103,18 @@ jobs:
               curl -I http://localhost:4173
 
       - name: make Snapshot
-        run: | 
-                mkdir gen
-                docker run -i --init --cap-add=SYS_ADMIN -v ./gen:/home/pptruser/gen
-                --network host ghcr.io/puppeteer/puppeteer:latest node -e "$(cat snapshot.js)"
-                 http://localhost:4173 ./gen mv gen/* static/
+        # run: | 
+        #         mkdir gen
+        #         docker run -i --init --cap-add=SYS_ADMIN -v ./gen:/home/pptruser/gen
+        #         --network host ghcr.io/puppeteer/puppeteer:latest node -e "$(cat snapshot.js)"
+        #          http://localhost:4173 ./gen mv gen/* static/
+        run: |
+            mkdir gen
+            docker run -i --init --cap-add=SYS_ADMIN \
+            -v $PWD/gen:/home/pptruser/gen \
+            --network host ghcr.io/puppeteer/puppeteer:latest \
+            node -e "$(cat snapshot.js)" http://localhost:4173 ./gen
+            mv gen/* static/
       
       - name: Push to github
         run: |
