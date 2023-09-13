@@ -102,12 +102,10 @@ jobs:
         run: |
               curl -I http://localhost:4173
 
-      - name: Set permission
-        run: chmod -R 777 ./gen
-
       - name: make Snapshot
         run: |
-            mkdir gen
+            mkdir gen 
+            chmod -R 777 ./gen
             docker run -i --init --cap-add=SYS_ADMIN \
             -v $PWD/gen:/home/pptruser/gen \
             --network host ghcr.io/puppeteer/puppeteer:latest \
