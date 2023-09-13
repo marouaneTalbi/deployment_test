@@ -111,6 +111,11 @@ jobs:
             --network host ghcr.io/puppeteer/puppeteer:latest \
             node -e "$(cat snapshot.js)" http://localhost:4173 ./gen
             mv gen/* static/
+
+      - name: Configure Git
+        run: |
+            git config --local user.email "talbi.918marouane@gmail.com"
+            git config --local user.name "marouaneTalbi"
       
       - name: Push to github
         run: |
